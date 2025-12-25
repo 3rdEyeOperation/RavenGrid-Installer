@@ -221,10 +221,14 @@ sudo ln -s /etc/nginx/streams-available/mediamtx /etc/nginx/streams-enabled/
 sudo systemctl enable nginx
 sudo systemctl restart nginx
 
+echo "${GREEN}Installing RavenGrid TAK Server UI...${NC}"
+sudo NEEDRESTART_MODE=a apt install nodejs npm -y
 sudo mkdir -p /var/www/html/opentakserver
 sudo chmod a+rw /var/www/html/opentakserver
 cd /var/www/html/opentakserver
-lastversion --assets extract brian7704/OpenTAKServer-UI
+git clone https://github.com/3rdEyeOperation/RavenGridTAKServer-UI.git .
+npm install
+npm run build
 
 sudo tee /etc/systemd/system/opentakserver.service >/dev/null << EOF
 [Unit]
