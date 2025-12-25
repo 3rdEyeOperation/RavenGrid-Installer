@@ -31,17 +31,17 @@ echo "${GREEN}Installing packages via apt. You may be prompted for your sudo pas
 sudo apt update && sudo NEEDRESTART_MODE=a apt upgrade -y
 sudo NEEDRESTART_MODE=a apt install curl python3 python3-pip python3-venv rabbitmq-server openssl nginx ffmpeg libnginx-mod-stream python3-dev postgresql-postgis pgloader -y
 
-echo "${GREEN} Installing OpenTAKServer from PyPI...${NC}"
+echo "${GREEN} Installing RavenGrid TAK Server from GitHub...${NC}"
 python3 -m venv --system-site-packages ~/.opentakserver_venv
 source "$HOME"/.opentakserver_venv/bin/activate
 python3 -m pip install --upgrade pip setuptools wheel
-pip3 install opentakserver
+pip3 install git+https://github.com/3rdEyeOperation/RavenGridTAKServer.git@master
 
 cd "$HOME"/.opentakserver_venv/lib/python3.*/site-packages/opentakserver
 # This command won't overwrite config.yml if it exists
 flask ots generate-config
 
-echo "${GREEN}OpenTAKServer Installed!${NC}"
+echo "${GREEN}RavenGrid TAK Server Installed!${NC}"
 
 echo "${GREEN}Initializing Database...${NC}"
 
